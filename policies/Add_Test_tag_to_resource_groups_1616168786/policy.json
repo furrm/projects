@@ -1,0 +1,49 @@
+{
+ "properties": {
+  "displayName": "Add Test tag to resource groups",
+  "policyType": "Custom",
+  "mode": "All",
+  "description": "This is a copy of the built-in definition of the same name. Adds the specified tag and value when any resource group missing this tag is created or updated. Existing resource groups can be remediated by triggering a remediation task. If the tag exists with a different value it will not be changed.",
+  "metadata": {
+   "version": "1.0.0",
+   "category": "Tags",
+   "createdBy": "6fa7d5b6-83ed-42d1-98f3-3ea2f4ccd826",
+   "createdOn": "2021-03-19T15:50:15.2668939Z",
+   "updatedBy": null,
+   "updatedOn": null
+  },
+  "parameters": {},
+  "policyRule": {
+   "if": {
+    "allOf": [
+     {
+      "field": "type",
+      "equals": "Microsoft.Resources/subscriptions/resourceGroups"
+     },
+     {
+      "field": "tags[Test]",
+      "exists": "false"
+     }
+    ]
+   },
+   "then": {
+    "effect": "modify",
+    "details": {
+     "roleDefinitionIds": [
+      "/providers/Microsoft.Authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c"
+     ],
+     "operations": [
+      {
+       "operation": "add",
+       "field": "tags[Test]",
+       "value": "Change_Me"
+      }
+     ]
+    }
+   }
+  }
+ },
+ "id": "/providers/Microsoft.Management/managementGroups/3fa940c7-075f-4cec-a96c-87592bdee03e/providers/Microsoft.Authorization/policyDefinitions/1616168786",
+ "type": "Microsoft.Authorization/policyDefinitions",
+ "name": "1616168786"
+}
